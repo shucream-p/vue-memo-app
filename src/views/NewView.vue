@@ -19,6 +19,9 @@ export default {
       memos: []
     }
   },
+  mounted () {
+    this.memos = JSON.parse(localStorage.getItem('memos')) || []
+  },
   methods: {
     addMemo() {
       const title = this.newMemo.split('\n')[0]
@@ -30,6 +33,7 @@ export default {
       this.memos.push(memo)
       this.newMemo = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
+      this.$router.push('/')
     }
   }
 }
