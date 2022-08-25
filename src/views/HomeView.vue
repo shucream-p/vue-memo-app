@@ -1,7 +1,11 @@
 <template>
   <div>
     <ul>
-      <li v-for="memo in memos" :key="memo.id">{{memo.title}}</li>
+      <li v-for="memo in memos" :key="memo.id">
+        <router-link :to="{ name: 'edit', params: { id: memo.id } }">
+          {{ memo.title }}
+        </router-link>
+      </li>
       <li v-show="!memos.length">メモはありません</li>
     </ul>
   </div>
@@ -10,7 +14,7 @@
 <script>
 export default {
   name: 'HomeView',
-  data() {
+  data () {
   return {
     memos: JSON.parse(localStorage.getItem('memos')) || []
   }
