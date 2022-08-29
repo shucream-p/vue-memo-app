@@ -1,19 +1,17 @@
 <template>
   <div>
-    <ul>
-      <li v-for="memo in memos" :key="memo.id">
-        <router-link :to="{ name: 'edit', params: { id: memo.id } }">
-          {{ memo.title }}
-        </router-link>
-      </li>
-      <li v-show="!memos.length">メモはありません</li>
-    </ul>
+    <MemoList/>
   </div>
 </template>
 
 <script>
+import MemoList from '../components/MemoList.vue'
+
 export default {
   name: 'HomeView',
+  components: {
+    MemoList
+  },
   data () {
   return {
     memos: JSON.parse(localStorage.getItem('memos')) || []

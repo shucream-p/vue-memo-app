@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>新規メモ</h2>
+    <MemoList/>
     <div>
       <textarea cols="40" rows="15" v-model="newMemo"></textarea>
     </div>
@@ -11,12 +11,17 @@
 </template>
 
 <script>
+import MemoList from '../components/MemoList.vue'
+
 export default {
   name: 'NewView',
+  components: {
+    MemoList
+  },
   data () {
     return {
       newMemo: '',
-      memos: []
+      memos: JSON.parse(localStorage.getItem('memos')) || []
     }
   },
   methods: {
@@ -28,7 +33,6 @@ export default {
         content: this.newMemo
       }
       this.memos.push(memo)
-      this.newMemo = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.$router.push('/')
     }

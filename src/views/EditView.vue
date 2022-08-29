@@ -1,5 +1,6 @@
 <template>
 <div>
+  <MemoList/>
   <div v-if="memo">
     <div>
       <textarea cols="40" rows="15" v-model="memo.content"></textarea>
@@ -13,8 +14,12 @@
 </template>
 
 <script>
+import MemoList from '../components/MemoList.vue'
 export default {
   name: 'EditView',
+  components: {
+    MemoList
+  },
   data () {
     return {
       memos: JSON.parse(localStorage.getItem('memos'))
