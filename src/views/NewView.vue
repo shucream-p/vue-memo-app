@@ -5,7 +5,7 @@
       <textarea cols="40" rows="15" v-model="newMemo"></textarea>
     </div>
     <div>
-      <button @click.prevent="addMemo">保存</button>
+      <button @click="addMemo">保存</button>
     </div>
   </div>
 </template>
@@ -13,17 +13,14 @@
 <script>
 export default {
   name: 'NewView',
-  data() {
+  data () {
     return {
       newMemo: '',
       memos: []
     }
   },
-  mounted () {
-    this.memos = JSON.parse(localStorage.getItem('memos')) || []
-  },
   methods: {
-    addMemo() {
+    addMemo () {
       const title = this.newMemo.split('\n')[0]
       const memo = {
         id: new Date().getTime().toString(),
