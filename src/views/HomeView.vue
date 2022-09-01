@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemoList/>
+    <MemoList :memos="memos"/>
   </div>
 </template>
 
@@ -12,11 +12,9 @@ export default {
   components: {
     MemoList
   },
-  data () {
-  return {
-    memos: JSON.parse(localStorage.getItem('memos')) || []
-  }
-}
+  props: {
+    memos: Array
+  },
 }
 </script>
 

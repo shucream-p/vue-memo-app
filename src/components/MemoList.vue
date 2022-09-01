@@ -15,11 +15,9 @@
 <script>
 export default {
   name: 'MemoList',
-  data () {
-  return {
-    memos: JSON.parse(localStorage.getItem('memos')) || []
+  props: {
+    memos: Array
   }
-}
 }
 </script>
 

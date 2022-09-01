@@ -1,16 +1,16 @@
 <template>
-<div>
-  <MemoList/>
-  <div v-if="memo">
-    <div>
-      <textarea cols="40" rows="15" v-model="memo.content"></textarea>
-    </div>
-    <div>
-      <button @click="editMemo">編集</button>
-      <button @click="deleteMemo">削除</button>
+  <div>
+    <MemoList :memos="memos"/>
+    <div v-if="memo">
+      <div>
+        <textarea cols="40" rows="15" v-model="memo.content"></textarea>
+      </div>
+      <div>
+        <button @click="editButtonClick">編集</button>
+        <button @click="deleteButtonClick">削除</button>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -20,27 +20,21 @@ export default {
   components: {
     MemoList
   },
-  data () {
-    return {
-      memos: JSON.parse(localStorage.getItem('memos'))
-    }
+  props: {
+    memos: Array
   },
   computed: {
     memo () {
       return this.memos.find(memo => memo.id === this.$route.params.id)
     }
   },
+  emits: ['editButtonClick', 'deleteButtonClick'],
   methods: {
-    editMemo () {
-      localStorage.setItem('memos', JSON.stringify(this.memos))
-      this.$router.push('/')
+    editButtonClick () {
+      this.$emit('editButtonClick', this.memo.content)
     },
-    deleteMemo () {
-      if (confirm('削除してよろしいですか？')) {
-        this.memos = this.memos.filter(memo => memo.id !== this.$route.params.id)
-        localStorage.setItem('memos', JSON.stringify(this.memos))
-        this.$router.push('/')
-      }
+    deleteButtonClick () {
+      this.$emit('deleteButtonClick')
     }
   }
 }

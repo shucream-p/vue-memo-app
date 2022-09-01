@@ -1,9 +1,51 @@
 <template>
   <div>
     <h1>メモアプリ</h1>
-    <router-view/>
+    <router-view :memos="memos" @add-button-click="addMemo" @edit-button-click="editMemo" @delete-button-click="deleteMemo"/>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data () {
+    return {
+      memos: JSON.parse(localStorage.getItem('memos')) || []
+    }
+  },
+  computed: {
+    memo () {
+      return this.memos.find(memo => memo.id === this.$route.params.id)
+    }
+  },
+  methods: {
+    saveLocalStorage () {
+      localStorage.setItem('memos', JSON.stringify(this.memos))
+      this.$router.push('/')
+    },
+    addMemo (e) {
+      const title = e.split('\n')[0]
+      const memo = {
+        id: new Date().getTime().toString(),
+        title: title,
+        content: e
+      }
+      this.memos.push(memo)
+      this.saveLocalStorage()
+    },
+    editMemo (e) {
+      this.memo.title = e.split('\n')[0]
+      this.saveLocalStorage()
+    },
+    deleteMemo () {
+      if (confirm('削除してよろしいですか？')) {
+        this.memos = this.memos.filter(memo => memo.id !== this.$route.params.id)
+        this.saveLocalStorage()
+      }
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -12,18 +54,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

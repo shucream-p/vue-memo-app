@@ -1,11 +1,11 @@
 <template>
   <div>
-    <MemoList/>
+    <MemoList :memos="memos"/>
     <div>
       <textarea cols="40" rows="15" v-model="newMemo"></textarea>
     </div>
     <div>
-      <button @click="addMemo">保存</button>
+      <button @click="addButtonClick">保存</button>
     </div>
   </div>
 </template>
@@ -18,23 +18,18 @@ export default {
   components: {
     MemoList
   },
+  props: {
+    memos: Array
+  },
   data () {
     return {
-      newMemo: '',
-      memos: JSON.parse(localStorage.getItem('memos')) || []
+      newMemo: ''
     }
   },
+  emits: ['addButtonClick'],
   methods: {
-    addMemo () {
-      const title = this.newMemo.split('\n')[0]
-      const memo = {
-        id: new Date().getTime().toString(),
-        title: title,
-        content: this.newMemo
-      }
-      this.memos.push(memo)
-      localStorage.setItem('memos', JSON.stringify(this.memos))
-      this.$router.push('/')
+    addButtonClick () {
+      this.$emit('addButtonClick', this.newMemo)
     }
   }
 }
