@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>メモアプリ</h1>
-    <router-view :memos="memos" :memo="memo" @add-button-click="addMemo" @edit-button-click="editMemo" @delete-button-click="deleteMemo"/>
+    <router-view :memos="memos" :memo="memo" @create-button-click="createMemo" @edit-button-click="editMemo" @delete-button-click="deleteMemo"/>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.$router.push('/')
     },
-    addMemo (e) {
+    createMemo (e) {
       const title = e.split('\n')[0]
       const memo = {
         id: new Date().getTime().toString(),

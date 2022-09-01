@@ -5,7 +5,7 @@
       <textarea cols="40" rows="15" v-model="newMemo" ref="textarea"></textarea>
     </div>
     <div>
-      <button @click="addButtonClick">保存</button>
+      <button @click="createButtonClick">保存</button>
     </div>
   </div>
 </template>
@@ -31,8 +31,8 @@ export default {
     this.$refs.textarea.focus()
   },
   methods: {
-    addButtonClick () {
-      this.$emit('addButtonClick', this.newMemo)
+    createButtonClick () {
+      this.$emit('createButtonClick', this.newMemo)
     }
   }
 }
