@@ -3,7 +3,7 @@
     <MemoList :memos="memos"/>
     <div v-if="memo">
       <div>
-        <textarea cols="40" rows="15" v-model="memo.content"></textarea>
+        <textarea cols="40" rows="15" id="textarea" :value="memo.content" ref="textarea"></textarea>
       </div>
       <div>
         <button @click="editButtonClick">編集</button>
@@ -21,17 +21,17 @@ export default {
     MemoList
   },
   props: {
-    memos: Array
-  },
-  computed: {
-    memo () {
-      return this.memos.find(memo => memo.id === this.$route.params.id)
-    }
+    memos: Array,
+    memo: Object
   },
   emits: ['editButtonClick', 'deleteButtonClick'],
+  mounted () {
+    this.$refs.textarea.focus()
+  },
   methods: {
     editButtonClick () {
-      this.$emit('editButtonClick', this.memo.content)
+      const updateMemo = document.getElementById('textarea').value
+      this.$emit('editButtonClick', updateMemo)
     },
     deleteButtonClick () {
       this.$emit('deleteButtonClick')

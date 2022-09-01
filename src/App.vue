@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>メモアプリ</h1>
-    <router-view :memos="memos" @add-button-click="addMemo" @edit-button-click="editMemo" @delete-button-click="deleteMemo"/>
+    <router-view :memos="memos" :memo="memo" @add-button-click="addMemo" @edit-button-click="editMemo" @delete-button-click="deleteMemo"/>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
     },
     editMemo (e) {
       this.memo.title = e.split('\n')[0]
+      this.memo.content = e
       this.saveLocalStorage()
     },
     deleteMemo () {
