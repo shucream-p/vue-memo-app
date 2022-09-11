@@ -6,7 +6,7 @@
         <textarea cols="40" rows="15" id="textarea" :value="memo.content" ref="textarea"></textarea>
       </div>
       <div>
-        <button @click="editButtonClick">編集</button>
+        <button @click="updateButtonClick">更新</button>
         <button @click="deleteButtonClick">削除</button>
       </div>
     </div>
@@ -24,14 +24,14 @@ export default {
     memos: Array,
     memo: Object
   },
-  emits: ['editButtonClick', 'deleteButtonClick'],
+  emits: ['updateButtonClick', 'deleteButtonClick'],
   mounted () {
     this.$refs.textarea.focus()
   },
   methods: {
-    editButtonClick () {
-      const updateMemo = document.getElementById('textarea').value
-      this.$emit('editButtonClick', updateMemo)
+    updateButtonClick () {
+      const updateContent = document.getElementById('textarea').value
+      this.$emit('updateButtonClick', updateContent)
     },
     deleteButtonClick () {
       this.$emit('deleteButtonClick')

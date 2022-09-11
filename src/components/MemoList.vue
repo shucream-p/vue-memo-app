@@ -3,7 +3,7 @@
     <ul>
       <li v-for="memo in memos" :key="memo.id">
         <router-link class="router-link" :to="{ name: 'edit', params: { id: memo.id } }">
-          {{ memo.title }}
+          {{ memo.content.split('\n')[0] }}
         </router-link>
       </li>
       <li v-show="!memos.length">メモはありません</li>
