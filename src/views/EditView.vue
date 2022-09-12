@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     updateButtonClick () {
-      const updateContent = document.getElementById('textarea').value
-      this.$emit('updateButtonClick', updateContent)
+      const content = document.getElementById('textarea').value
+      this.$emit('updateButtonClick', content)
     },
     deleteButtonClick () {
       this.$emit('deleteButtonClick')

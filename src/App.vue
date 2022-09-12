@@ -23,16 +23,16 @@ export default {
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.$router.push('/')
     },
-    createMemo (newContent) {
+    createMemo (content) {
       const memo = {
         id: new Date().getTime().toString(),
-        content: newContent
+        content: content
       }
       this.memos.push(memo)
       this.saveLocalStorage()
     },
-    updateMemo (updateContent) {
-      this.memo.content = updateContent
+    updateMemo (content) {
+      this.memo.content = content
       this.saveLocalStorage()
     },
     deleteMemo () {

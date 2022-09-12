@@ -2,7 +2,7 @@
   <div>
     <MemoList :memos="memos"/>
     <div>
-      <textarea cols="40" rows="15" v-model="newContent" ref="textarea"></textarea>
+      <textarea cols="40" rows="15" v-model="content" ref="textarea"></textarea>
     </div>
     <div>
       <button @click="createButtonClick">保存</button>
@@ -24,7 +24,7 @@ export default {
   emits: ['createButtonClick'],
   data () {
     return {
-      newContent: ''
+      content: ''
     }
   },
   mounted () {
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     createButtonClick () {
-      this.$emit('createButtonClick', this.newContent)
+      this.$emit('createButtonClick', this.content)
     }
   }
 }
