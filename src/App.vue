@@ -26,7 +26,7 @@ export default {
     createMemo (content) {
       const memo = {
         id: new Date().getTime().toString(),
-        content: content
+        content
       }
       this.memos.push(memo)
       this.saveLocalStorage()
